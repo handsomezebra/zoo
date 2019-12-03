@@ -30,13 +30,13 @@ def get_result(text, lang, dims, latent=None, reftime=None, tz=None):
         response = requests.post(url, data=data)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
-        logging.warning("Duckling service %s requests exception: %s", url, e)
+        logging.warning("Service %s requests exception: %s", url, e)
 
     if response is None:
-        logging.warning("Failed to call translation service")
+        logging.warning("Failed to call service")
         return None
     elif response.status_code != 200:
-        logging.warning("Invalid response code %d from translation service", response.status_code)
+        logging.warning("Invalid response code %d from service", response.status_code)
         return None
     else:
         return response.json()

@@ -5,7 +5,7 @@ from fastapi import FastAPI
 import logging
 from sentence_transformers import SentenceTransformer
 
-from utility import load_config, setup_logging
+from src.utility import load_config, setup_logging
 conf = load_config()
 
 logger = logging.getLogger(__name__)
@@ -17,10 +17,10 @@ pretrained_weights = 'bert-large-nli-stsb-mean-tokens'
 model = SentenceTransformer(pretrained_weights)
 
 @app.post("/predict")
-async def predict(text_list):
+async def predict(data: dict):
     logger.info("Received data")
 
-    sentence_embeddings = model.encode(text_list)
+    sentence_embeddings = model.encode(data["text_list"])
 
     sentence_embeddings = [x.tolist() for x in sentence_embeddings]
 

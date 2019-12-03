@@ -2,10 +2,8 @@
 
 import yaml
 import os
-import os.path as op
 import logging
 import logging.config
-import sys
 
 config = None
 
@@ -28,7 +26,7 @@ def override_float(config_obj, name):
         config_obj[name] = float(value)
 
 
-def load_config(config_file_path='src/config/config.yml'):
+def load_config(config_file_path='src/config.yml'):
     global config
     if config is None:
         value = os.getenv('CONFIG', None)
@@ -53,8 +51,7 @@ def load_config(config_file_path='src/config/config.yml'):
 
 def setup_logging(log_config_file_path=None):
     if log_config_file_path is None:
-        current_path = op.dirname(op.realpath(__file__))
-        log_config_file_path = op.join(current_path, "logging.yml")
+        log_config_file_path = "src/logging.yml"
 
     with open(log_config_file_path, 'rt') as f:
         log_config = yaml.load(f)
