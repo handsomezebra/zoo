@@ -1,6 +1,6 @@
-# duckling
+# Duckling
 
-Duckling is a Haskell library that parses text into structured data.
+This is the docker file for Duckling. Duckling is a Haskell library that parses text into structured data. [[code]](https://github.com/facebook/duckling)
 
 ## Usage
 1. build
