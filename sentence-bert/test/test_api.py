@@ -32,6 +32,6 @@ def get_result(text_list):
 
 def test_basic():
 
-    result = get_result(["hello world!", "thank you"])
+    result = get_result(["hello world!", "thank you"] * 1024)
 
-    assert len(result) == 2 and len(result[0]) == 1024 and len(result[1]) == 1024
+    assert len(result) == 2048 and len(result[0]) == 1024 and len(result[1]) == 1024

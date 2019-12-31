@@ -1,0 +1,14 @@
+FROM pytorch/pytorch:latest
+
+RUN \
+  pip install --no-cache-dir fastapi uvicorn pyyaml sentence-transformers && \
+  rm -rf /root/.cache && \
+  mkdir /root/sentence-bert && mkdir /root/sentence-bert/log
+
+RUN python -c "from sentence_transformers import SentenceTransformer; model = SentenceTransformer('bert-large-nli-stsb-mean-tokens')"
+
+ENV LOG_FILE=/root/sentence-bert/sentence-bert.log
+EXPOSE 10000
+WORKDIR /root/sentence-bert
+COPY src src
+ENTRYPOINT ["python", "-m", "src.main"]
